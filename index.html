@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Responsive Tabs</title>
+		<link rel="stylesheet" href="css/responsivetabs.css" />
+		<style>
+
+			div[data-responsive-tabs]
+			{
+				display : none;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div data-responsive-tabs>
+			<nav>
+				<ul>
+					<li>
+						<a href="#one">One</a>
+					</li>
+					<li>
+						<a href="#two">Two</a>
+					</li>
+					<li>
+						<a href="#three">Three</a>
+					</li>										
+				</ul>
+			</nav>
+			<div class="content">
+				<section id="one">
+					<h3>Section 1</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur deleniti, odio quibusdam laboriosam cupiditate quo repellendus iure optio ea maiores tempore voluptatibus omnis temporibus nemo, a natus repudiandae nulla excepturi.</p>
+				</section>
+				<section id="two">
+					<h3>Section 2</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur deleniti, odio quibusdam laboriosam cupiditate quo repellendus iure optio ea maiores tempore voluptatibus omnis temporibus nemo, a natus repudiandae nulla excepturi.</p>
+				</section>
+				<section id="three">
+					<h3>Section 3</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur deleniti, odio quibusdam laboriosam cupiditate quo repellendus iure optio ea maiores tempore voluptatibus omnis temporibus nemo, a natus repudiandae nulla excepturi.</p>
+				</section>								
+			</div>
+		</div>
+		<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+		<script src="js/responsivetabs.js"></script>
+		<script>
+			$(document).ready(function ()
+			{	
+				// $(document).on('responsive-tabs.initialised', function (event, el)
+				// {
+				// 	console.log(el);
+				// });
+
+				$('[data-responsive-tabs]').responsivetabs(
+				{
+					initialised : function ()
+					{
+						console.log(this);
+					},
+
+					change : function (newPanel)
+					{
+						console.log(newPanel);
+					}
+				});
+
+
+			});
+		</script>
+	</body>
+</html>

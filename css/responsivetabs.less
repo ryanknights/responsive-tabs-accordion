@@ -1,0 +1,146 @@
+@color-border : #e1e1e1;
+@color-white  : #ffffff;
+@color-font   : #333333;
+
+@nav-font-size : 16px;
+
+.responsive-tabs
+{   
+    &.responsive-tabs-initialized
+    {
+        display : block;
+    }
+
+    > div.content
+    {
+        clear : both;
+    }
+
+    /*=================================
+    =            Accordion            =
+    =================================*/
+    
+    &.accordion
+    {   
+        border : 1px solid @color-border;
+        -webkit-box-shadow: 0px 1px 1px 0px rgba(50, 50, 50, 0.1);
+        -moz-box-shadow:    0px 1px 1px 0px rgba(50, 50, 50, 0.1);
+        box-shadow:         0px 1px 1px 0px rgba(50, 50, 50, 0.1);        
+
+        > nav
+        {
+            display : none;
+        }
+
+        h3.accordion-title
+        {
+            margin : 0;
+
+            a
+            {
+                background : @color-white;
+                font-weight : normal;
+                border-top: 1px solid @color-border;
+                padding:10px 15px;
+                display:block;
+                font-size:@nav-font-size;
+                color : @color-font;
+                text-decoration:none;         
+            }
+
+            &.active a
+            {
+                font-weight : 700;
+            }              
+
+            &:first-child a
+            {
+                border-top : none;
+            }
+        }
+
+        > div.content > section
+        {
+            padding    : 10px;
+            background : @color-white;
+            display    : block;
+            border-top : 1px solid @color-border;
+            overflow   : auto;
+        }
+    }
+
+    /*============================
+    =            Tabs            =
+    ============================*/
+
+    &.tabs
+    {
+        border : none;
+
+        > nav
+        {   
+            display : block;
+
+            ul
+            {
+                list-style : none;
+                padding    : 0;
+                margin     : 0;
+
+                &:after
+                {
+                    content : '';
+                    display : table;
+                    clear   : both;
+                }
+
+                li
+                {
+                    float : left;
+                    font-size : @nav-font-size;
+                    border-left : 1px solid @color-border;
+                    border-top  : 1px solid @color-border;
+
+                    &:last-child
+                    {
+                        border-right : 1px solid @color-border;
+                    }
+
+                    &.active
+                    {
+                        position : relative;
+                        z-index  : 2;
+                        top      : 2px;
+                        margin-top : -2px;
+                        border-bottom : 1px solid @color-white;
+                    }
+
+                    a
+                    {
+                        color : @color-font;
+                        background : @color-white;
+                        padding    : 10px 15px;
+                        font-size  : @nav-font-size;
+                        display    : block;
+                        text-decoration : none;
+                    }
+                }
+            }
+        }
+
+        h3.accordion-title
+        {
+            display : none;
+        }
+
+        > div.content
+        {
+            padding : 15px;
+            background : @color-white;
+            border : 1px solid @color-border;
+            -webkit-box-shadow: 0px 1px 1px 0px rgba(50, 50, 50, 0.1);
+            -moz-box-shadow:    0px 1px 1px 0px rgba(50, 50, 50, 0.1);
+            box-shadow:         0px 1px 1px 0px rgba(50, 50, 50, 0.1);            
+        }
+    }  
+}
