@@ -47,10 +47,16 @@
 		<script>
 			$(document).ready(function ()
 			{	
-				// $(document).on('responsive-tabs.initialised', function (event, el)
-				// {
-				// 	console.log(el);
-				// });
+				$(document).on('responsive-tabs.initialised', function (event, el)
+				{
+					console.log(el);
+				});
+
+				$(document).on('responsive-tabs.change', function (event, el, newPanel)
+				{
+					console.log(el);
+					console.log(newPanel);
+				});
 
 				$('[data-responsive-tabs]').responsivetabs(
 				{

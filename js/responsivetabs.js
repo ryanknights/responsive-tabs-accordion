@@ -9,7 +9,8 @@
 
         this.options = $.extend({}, this._defaultOptions, options, this.$el.data());
 
-        this.links  = this.$el.find('> nav a');
+        this.nav    = this.$el.find('> nav');
+        this.links  = this.nav.find('a');
         this.panels = this.$el.find('div.content > section'); 
 
         this._checkType();
@@ -66,24 +67,7 @@
 
             event.preventDefault(); //prevent default action
 
-            var _this = $(this), //reference the link clicked
-                _newPanel = _this.attr('href'); //store the items href
-
-            if (!_this.parent().hasClass('active')) { //if the link is not already active
-
-                (self.$el.hasClass('tabs')) ? self._tabs(_newPanel) : self._accordion(_newPanel); //run change function depending on type
-
-                ($.isFunction(self.options.change)) && self.options.change.call(self.$el, $(_newPanel));
-                $(document).trigger('responsive-tabs.change', [self.$el, $(_newPanel)]);                
-         
-            } else if (self.$el.hasClass('accordion') && _this.parent().hasClass('active')) {
-
-                if (self.options.collapsible === true) {
-
-                    self._accordionCollapse(_newPanel);
-                }
-            }
-            
+            self._change(this);
         });
 
         if (this.options.type === 'responsive')
@@ -93,6 +77,27 @@
                 self._checkType(); //check elements type i.e. tabs/accordion
             });
         }
+    };
+
+    ResponsiveTabs.prototype._change = function (trigger)
+    {   
+        var _trigger = $(trigger),
+            _newPanel = _trigger.attr('href'); //store the items href
+
+        if (!_trigger.parent().hasClass('active')) { //if the link is not already active
+
+            (this.$el.hasClass('tabs')) ? this._tabs(_newPanel) : this._accordion(_newPanel); //run change function depending on type
+
+            ($.isFunction(this.options.change)) && this.options.change.call(this.$el, $(_newPanel));
+            $(document).trigger('responsive-tabs.change', [this.$el, $(_newPanel)]);                
+     
+        } else if (this.$el.hasClass('accordion') && _trigger.parent().hasClass('active')) {
+
+            if (this.options.collapsible === true) {
+
+                this._accordionCollapse(_newPanel);
+            }
+        }        
     };
 
     ResponsiveTabs.prototype._initialise = function ()
@@ -162,6 +167,17 @@
         {
             (this.options.type === 'tabs') ? this.$el.addClass('tabs') : this.$el.addClass('accordion');
         }
+    };
+
+    ResponsiveTabs.prototype.open = function (index)
+    {
+        var $trigger = this.nav.find('li').eq(index).children('a');
+
+        if ($trigger.length)
+        {
+            this._change($trigger);   
+        }
+        
     };
 
     function Plugin (options)
